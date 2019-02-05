@@ -25,4 +25,8 @@ QUnit.module('Проверка работы функции filter', function () 
 		assert.strictEqual(filter(`<script>alert('1');</script>`, [ 'strong', 'em' ]), '&lt;script&gt;alert(&#39;1&#39;);&lt;/script&gt;');
 		assert.strictEqual(filter(`<img src="bad" onerror="alert('1');">`, [ 'strong', 'em' ]), '&lt;img src=&quot;bad&quot; onerror=&quot;alert(&#39;1&#39;);&quot;&gt;');
 	});
+
+	QUnit.test('filter не экранирует валидные теги и атрибуты в ней', function (assert) {
+		assert.strictEqual(filter(`<div class="element" id="first" >Hey Frontend!</div><img src="front.jpg" alt="картинка программиста">`, [ 'div', 'img' ]), '<div class="element" id="first" >Hey Frontend!</div><img src="front.jpg" alt="картинка программиста">');
+	});
 });
