@@ -12,7 +12,7 @@ const specialCharacters = {
 };
 
  const filter = (code, tags) => {
-    return code.replace(/<\/?(\w+).*?>|\W/g, function (match, firstGroup) {
+    return code.replace(/<\/?(\w+).*?>|\W/g, (match, firstGroup) => {
         if (firstGroup) {
             if (!tags.includes(firstGroup)) {
                 return removeSpecialCharacters(match)
@@ -29,7 +29,7 @@ const specialCharacters = {
 
 //функция меняет специальные симовлы на html-код
 const removeSpecialCharacters = code => {
-    return code.replace(/[<>'"&]/g, function (match) {
+    return code.replace(/[<>'"&]/g, match => {
         return specialCharacters[match];
     });
 };
