@@ -3,22 +3,23 @@
     Напишите функцию filter, которая фильтрует html-код, оставляя только разрешённые html-теги
 */
 
+const specialCharacters = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+};
+
 function filter(code, tags){
-    const specialCharacters = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
-    };
     return code.replace(/<\/?(\w+).*?>|\W/g, function (match, firstGroup) {
-        if (firstGroup){
-            if (!tags.includes(firstGroup)){
+        if (firstGroup) {
+            if (!tags.includes(firstGroup)) {
                 return removeSpecialCharacters(match)
-            }else{
+            } else {
                 return match;
             }
-        }else{
+        } else {
             return specialCharacters[match] || match;
         }
     });
@@ -28,13 +29,6 @@ function filter(code, tags){
 
 //функция меняет специальные симовлы на html-код
 function removeSpecialCharacters(code){
-    const specialCharacters = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
-    };
     return code.replace(/[<>'"&]/g, function (match) {
         return specialCharacters[match];
     });

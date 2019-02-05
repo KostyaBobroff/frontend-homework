@@ -29,4 +29,7 @@ QUnit.module('Проверка работы функции filter', function () 
 	QUnit.test('filter не экранирует валидные теги и атрибуты в ней', function (assert) {
 		assert.strictEqual(filter(`<div class="element" id="first" >Hey Frontend!</div><img src="front.jpg" alt="картинка программиста">`, [ 'div', 'img' ]), '<div class="element" id="first" >Hey Frontend!</div><img src="front.jpg" alt="картинка программиста">');
 	});
+	QUnit.test('filter экранирует символы и невалидные теги', function (assert) {
+		assert.strictEqual(filter(`<div class="element" id="first" ><script>alert('Hey Frontend!');</script></div><img src="front.jpg" alt="картинка программиста">`, [ 'div', 'img' ]), '<div class="element" id="first" >&lt;script&gt;alert(&#39;Hey Frontend!&#39;);&lt;/script&gt;</div><img src="front.jpg" alt="картинка программиста">');
+	});
 });
