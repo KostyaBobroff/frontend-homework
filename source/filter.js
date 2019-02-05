@@ -11,7 +11,7 @@ const specialCharacters = {
     "'": '&#39;'
 };
 
-function filter(code, tags){
+ const filter = (code, tags) => {
     return code.replace(/<\/?(\w+).*?>|\W/g, function (match, firstGroup) {
         if (firstGroup) {
             if (!tags.includes(firstGroup)) {
@@ -20,17 +20,16 @@ function filter(code, tags){
                 return match;
             }
         } else {
-            return specialCharacters[match] || match;
+            return specialCharacters.hasOwnProperty(match) ? specialCharacters[match] : match;
         }
     });
 
-}
+};
 
 
 //функция меняет специальные симовлы на html-код
-function removeSpecialCharacters(code){
+const removeSpecialCharacters = code => {
     return code.replace(/[<>'"&]/g, function (match) {
         return specialCharacters[match];
     });
-
-}
+};
