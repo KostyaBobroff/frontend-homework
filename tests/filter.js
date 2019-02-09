@@ -38,4 +38,8 @@ QUnit.module('Проверка работы функции filter', function () 
 		assert.strictEqual(filter(`<div class="row"><p>Число 39 < 15 & 45 > 23</p>></div>`, []), "&lt;div class=&quot;row&quot;&gt;&lt;p&gt;Число 39 &lt; 15 &amp; 45 &gt; 23&lt;/p&gt;&gt;&lt;/div&gt;");
 	});
 
+	QUnit.test('filter возвращает пустую строку', function (assert) {
+		assert.strictEqual(filter('',[]), "");
+	});
+
 });

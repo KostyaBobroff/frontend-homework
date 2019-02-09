@@ -31,5 +31,3 @@ const removeSpecialCharacters = code => {
     return code.replace(/[<>'"&]/g, match => SPECIAL_CHARACTERS[match]);
 };
 
-
-console.log(filter(`<div class="row"><p>Число 39 < 15 & 45 > 23</p>></div>`,[]));
