@@ -3,7 +3,7 @@
     Напишите функцию filter, которая фильтрует html-код, оставляя только разрешённые html-теги
 */
 
-const specialCharacters = {
+const SPECIAL_CHARACTERS = {
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
@@ -11,25 +11,25 @@ const specialCharacters = {
     "'": '&#39;'
 };
 
+
+
  const filter = (code, tags) => {
     return code.replace(/<\/?(\w+).*?>|\W/g, (match, firstGroup) => {
         if (firstGroup) {
             if (!tags.includes(firstGroup)) {
                 return removeSpecialCharacters(match)
-            } else {
-                return match;
             }
-        } else {
-            return specialCharacters.hasOwnProperty(match) ? specialCharacters[match] : match;
+            return match;
         }
+        return SPECIAL_CHARACTERS.hasOwnProperty(match) ? SPECIAL_CHARACTERS[match] : match;
     });
-
 };
 
 
 //функция меняет специальные симовлы на html-код
 const removeSpecialCharacters = code => {
-    return code.replace(/[<>'"&]/g, match => {
-        return specialCharacters[match];
-    });
+    return code.replace(/[<>'"&]/g, match => SPECIAL_CHARACTERS[match]);
 };
+
+
+console.log(filter(`<div class="row"><p>Число 39 < 15 & 45 > 23</p>></div>`,[]));
