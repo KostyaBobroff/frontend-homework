@@ -15,13 +15,15 @@ const SPECIAL_CHARACTERS = {
 
  const filter = (code, tags) => {
     return code.replace(/<\/?(\w+).*?>|\W/g, (match, firstGroup) => {
-        if (firstGroup) {
-            if (!tags.includes(firstGroup)) {
-                return removeSpecialCharacters(match)
-            }
-            return match;
+        if (!firstGroup) {
+            return SPECIAL_CHARACTERS.hasOwnProperty(match) ? SPECIAL_CHARACTERS[match] : match;
         }
-        return SPECIAL_CHARACTERS.hasOwnProperty(match) ? SPECIAL_CHARACTERS[match] : match;
+
+        if (!tags.includes(firstGroup)) {
+            return removeSpecialCharacters(match)
+        }
+
+        return match;
     });
 };
 
